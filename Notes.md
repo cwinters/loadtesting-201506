@@ -59,16 +59,21 @@ Graphic with different areas:
 
 # Roadmap
 
+- Story: start with functionality, deal with scaling when we need to
+- "When we need to" is very fluid, and unless you've gone through this ride
+  before you'll probably guess it wrong
 - What do we want to learn from load testing?
     - Ideal world: every time you make a change, how did that affect performance?
     - Actual world: AHHHHHHH! EVERYTHING STOPPED! WHY DID THAT HAPPEN?!
 - What tools exist for load testing? What are their different uses?
 - Another aspect of devops mentality -- it's everyone's responsibility, not
   just the DBA, or the sysadmin, or the network engineer
-- Why don't we do load testing more often?
-    - It's hard!
-    - Data setup, generating load
-    - State
+- What prevents us from doing load testing more often?
+    - It's hard! Why?
+    - Data setup (initial state and old problem of keeping that in-sync with
+      code, which we solve in unit tests by having as little as possible)
+    - Generating load
+    - Lots of numbers, making reports
 
 # Story
 
