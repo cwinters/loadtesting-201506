@@ -68,6 +68,24 @@
   </section>
 
   <section>
+    <h2>A story</h2>
+    <aside class="notes">
+      You have a great idea for a social recipes app. Like all good startups
+      you start with functionality -- you release it to friends and family, and
+      as you improve it you expand your circles of users. There's enough
+      enthusiasm from them that there's a voice in the back of your head
+      saying, "How will we deal with half a million users? Five million?" but
+      you brush it aside as something that will probably never happen anyway.
+
+      But it does. Not all at once, there's no Oprah Moment. But you grow in
+      fits and starts and before you know it you've got 600k active users. And
+      the system has been exhibiting weird slowdowns and failures every now and
+      then, but it's mostly manageable.
+    
+    </aside>
+  </section>
+
+  <section>
     <h2>Goal: Learn enough to get by</h2>
     <p>
       Run through some basics, strengths of different tools,
@@ -80,7 +98,7 @@
   </section>
 
   <section>
-    <img src="lib/images/type_one_random.png" />
+    <img src="lib/images/type_one_random.png" alt="Random access" />
     <aside class="notes">
       Probably most popular type. Give it a URL, or a set of URLs, and 
       it will request them many times a second for as long as you want.
@@ -90,12 +108,35 @@
   </section>
 
   <section>
-    <img src="lib/images/type_three_varied.png" />
+    <h2>Stress test</h2>
+    <p>Fun image here</p>
+
+    <aside class="notes">
+      These are often known as stress testers. They're fairly easy to setup --
+      in fact, many times all you need is to give them the number of clients
+      and a URL.
+    </aside>
+  </section>
+
+  <section>
+    <img src="lib/images/type_three_varied.png" alt="Varied access" />
     <aside class="notes">
       Next-level load testing, required if you have a stateful application that where
-      each result depends on earlier actions. Typically scripted in some manner
-      (DSL, XML) with state management. I've written one of these. (Long, long
-      time ago...)
+      each result depends on earlier actions. You also great users as users
+      vs dealing with a random bag of URLs. Typically scripted in some manner
+      (DSL, XML) with state management. I've written two of these a long, long
+      time ago.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Approaching simulation</h2>
+    <p>Fun image here, maybe Public/images/crazy_complicated_process.gif?</p>
+    <aside class="notes">
+      These can be straightforward, but they can also be an Effort Pit. Simulating
+      users can be difficult -- give example of AccuNurse, difficulties of state
+      management that you keep in your head with little effort. To be useful
+      you have to know your users pretty well.
     </aside>
   </section>
 
@@ -104,9 +145,18 @@
     <aside class="notes">
       And then there are a lot of applications that are more workflow-y but not
       as dynamic. The tool you use depends on how much state you need to carry
-      around, reports you want to generate, how much you love XML... Using
-      tools from either of the other two is possible, but not quite the right
-      fit. (IMO)
+      around, reports you want to generate, how much you love XML... Can work
+      well with authentication since you're treating users as users.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Session-based simulation</h2>
+    <p>Fun image here</p>
+    <aside class="notes">
+      This middle ground forces you to generate sessions, or steps of actions,
+      but the smarts to do this is typically far simpler than the runtime
+      simulation. It's also deterministic.
     </aside>
   </section>
 
