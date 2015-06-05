@@ -24,6 +24,7 @@ What is a good example that's not hello world but also not too difficult?
 - Compare/contrast with something like modcloth (WHAT WAS THE NAME OF THE
   RIPOFF SITE?)
 
+
 ## Outsourcing/tools
 
 Relying on external service (NewRelic, whatever) to show graphs, etc:
@@ -46,6 +47,7 @@ Graphic with different areas:
     - reporting
     - admin actions (?)
     - external interfaces (Braintree)
+    - checkout
 
 ## Little things
 

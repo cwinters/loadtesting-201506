@@ -67,6 +67,48 @@
     </aside>
   </section>
 
+  <section>
+    <h2>Goal: Learn enough to get by</h2>
+    <p>
+      Run through some basics, strengths of different tools,
+      describe a gap in them and show an approach for generating
+      and testing load.
+    </p>
+    <aside class="notes">
+      Again -- not an expert!
+    </aside>
+  </section>
+
+  <section>
+    <img src="lib/images/type_one_random.png" />
+    <aside class="notes">
+      Probably most popular type. Give it a URL, or a set of URLs, and 
+      it will request them many times a second for as long as you want.
+      Reporting varies, but for the simple uses you want pretty basic
+      information.
+    </aside>
+  </section>
+
+  <section>
+    <img src="lib/images/type_three_varied.png" />
+    <aside class="notes">
+      Next-level load testing, required if you have a stateful application that where
+      each result depends on earlier actions. Typically scripted in some manner
+      (DSL, XML) with state management. I've written one of these. (Long, long
+      time ago...)
+    </aside>
+  </section>
+
+  <section>
+    <img src="lib/images/type_two_predictable.png" />
+    <aside class="notes">
+      And then there are a lot of applications that are more workflow-y but not
+      as dynamic. The tool you use depends on how much state you need to carry
+      around, reports you want to generate, how much you love XML... Using
+      tools from either of the other two is possible, but not quite the right
+      fit. (IMO)
+    </aside>
+  </section>
 
   <section>
     <h3>Photos</h3>
