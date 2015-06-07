@@ -70,35 +70,95 @@
   <section>
     <h2>A story</h2>
     <aside class="notes">
-      You have a great idea for a social recipes app. Like all good startups
+      <p>You have a great idea for a social recipes app. Like all good startups
       you start with functionality -- you release it to friends and family, and
-      as you improve it you expand your circles of users. There's enough
-      enthusiasm from them that there's a voice in the back of your head
-      saying, "How will we deal with half a million users? Five million?" but
-      you brush it aside as something that will probably never happen anyway.
+      as you improve it you expand your circles of users, and expand it again,
+      and again. There's enough enthusiasm from everyone that there's a voice
+      in the back of your head saying, "How will we deal with half a million
+      users? Five million?" but you brush it aside as something that will
+      probably never happen anyway.</p>
 
-      But it does. Not all at once, there's no Oprah Moment. But you grow in
+      <p>But it does. Not all at once, there's no Oprah Moment. But you grow in
       fits and starts and before you know it you've got 600k active users. And
       the system has been exhibiting weird slowdowns and failures every now and
-      then, but it's mostly manageable.
-    
+      then, but it's mostly manageable and there's still *so much to do* you
+      can't believe it. With many more people comes many more feature ideas --
+      good ones! -- and new ways to monetize the idea, which is good because
+      growth is expensive! So you focus on functionality because you need to
+      keep the doors open, and you size up your EC2 and RDS instances and
+      things get a little better.</p>
+
+      <p>And then you look up and you have 2m active users. And the slowdowns
+      aren't so weird anymore, but routine, even to the point where it's a
+      thing among your customers. (Instead of a fail whale it's a fail basket.)
+      They still dig you, but you feel like they'll move on given much more
+      trouble.</p>
+
+      <p>... how does this end?</p>
+    </aside>
+  </section>
+
+  <section>
+    <h2>All about trade-offs</h2>
+    <p align="center">
+      <img src="lib/images/Fred_Brooks.jpg" alt="Fred Brooks" />
+    </p>
+    <aside class="notes">
+      <p>My wife gets so tired of me saying this. But it's even more obvious in
+      software development than other areas of life. It's been clear for years
+      that there is No Silver Bullet. And it's easy to say tut-tut at stories
+      like this and say it's obvious they should have done capacity planning,
+      and load testing.</p>
+
+      <p>But there are opportunity costs for such things, especially because
+      people who understand performance of many different parts of the system
+      are <b>really</b> hard to find. (Probably because most organizations don't
+      value them well, but that's another talk.)</p>
+
+      <p>I'm a classic fumbler with performance as well. So like most of us when
+      there are problems I tinker and poke and experiment. And that all takes
+      time, time that we're not building features, time that we're not figuring
+      out how to make money. It's a trade-off, and an easy one to get wrong.</p>
     </aside>
   </section>
 
   <section>
     <h2>Goal: Learn enough to get by</h2>
     <p>
-      Run through some basics, strengths of different tools,
-      describe a gap in them and show an approach for generating
-      and testing load.
+      Run through some types and expectation,
+      <br />
+      strengths of different tools,
+      <br />
+      and talk about generating and testing load.
     </p>
     <aside class="notes">
-      Again -- not an expert!
+      So what does that mean for today? We'll learn enough to get by. I'll
+      talk about some basics of load testing and describe some different
+      approaches, focusing on one that fits a lot of applications that many
+      standard tools don't, is deterministic, straightforward, and flexible but
+      not all-things-to-all-people.
     </aside>
   </section>
 
   <section>
-    <img src="lib/images/type_one_random.png" alt="Random access" />
+    <h2>Not an expert!</h2>
+    <p align="center">
+      <img src="lib/images/homer_simpson_pointing_by_frasier_and_niles.jpg" alt="Homer pointing" />
+    </p>
+    <aside class="notes">
+      Standard disclaimer. Also, note that I'll be talking about tools that
+      exercise your application via HTTP rather than automating a browser.:
+    </aside>
+  </section>
+
+  <section>
+    <h2>Type: Random access</h2>
+
+    <p>Every action is separate from every other action</p>
+
+    <p class="fragment fade-in">Examples: catalog, search, blog</p>
+
+    <p class="fragment fade-in">This is great! (if you can get it)</p>
     <aside class="notes">
       Probably most popular type. Give it a URL, or a set of URLs, and 
       it will request them many times a second for as long as you want.
@@ -108,9 +168,11 @@
   </section>
 
   <section>
-    <h2>Stress test</h2>
-    <p>Fun image here</p>
-
+    <h2>Random access ~~ Stress test</h2>
+    <p>
+      <img src="lib/images/stress_test_dolphin_jumping.jpg"
+           alt="What are the differences between the dolphins?" />
+    </p>
     <aside class="notes">
       These are often known as stress testers. They're fairly easy to setup --
       in fact, many times all you need is to give them the number of clients
@@ -119,19 +181,51 @@
   </section>
 
   <section>
-    <img src="lib/images/type_three_varied.png" alt="Varied access" />
+    <h2>Random access tools: many many</h2>
+
+    <ul>
+      <li>Vegeta</li>
+      <li>http-perf</li>
+      <li>ab</li>
+      <li>wrk</li>
+      <li>Siege</li>
+      <li>Bees with machine guns</li>
+      <li>blitz.io</li>
+      <li>...</li>
+    </ul>
+
     <aside class="notes">
-      Next-level load testing, required if you have a stateful application that where
-      each result depends on earlier actions. You also great users as users
-      vs dealing with a random bag of URLs. Typically scripted in some manner
-      (DSL, XML) with state management. I've written two of these a long, long
-      time ago.
+      Very mature area of testing, with some tools approaching 20 years old.
+      New ones created all the time because it's easy and an interesting
+      problem to cut your concurrency teeth on. Of particular interest are
+      those that conveniently and transparently marshal cloud resources to hit
+      your app from many machines at once.
     </aside>
   </section>
 
   <section>
-    <h2>Approaching simulation</h2>
-    <p>Fun image here, maybe Public/images/crazy_complicated_process.gif?</p>
+    <h2>Type: Varied workflow</h2>
+
+    <p>Every action may change based on the results of previous actions</p>
+
+    <p class="fragment fade-in">Examples: insurance application, adaptive math</p>
+
+    <p class="fragment fade-in">Difficult but fun; potentially brittle</p>
+
+    <aside class="notes">
+      Next-level load testing, required if you have a stateful application that where
+      each result depends on earlier actions. You also work with users as users
+      vs dealing with a random bag of URLs. Tests can be brittle because the
+      representation of the logic to move through the workflow is almost
+      certainly separate from the business logic.
+    </aside>
+  </section>
+
+  <section>
+    <h2>Varied workflow ~~ simulation with smarts</h2>
+    <p>
+      <img src="lib/images/crazy_complicated_process.gif" alt="Crazy complicated process" />
+    </p>
     <aside class="notes">
       These can be straightforward, but they can also be an Effort Pit. Simulating
       users can be difficult -- give example of AccuNurse, difficulties of state
@@ -141,7 +235,27 @@
   </section>
 
   <section>
-    <img src="lib/images/type_two_predictable.png" />
+    <h2>Varied workflow tools</h2>
+    <ul>
+      <li>Gatling</li>
+      <li>JMeter</li>
+      <li>Locust</li>
+      <li>Pylot</li>
+      <li>Multi-mechanize</li>
+    </ul>
+    <aside class="notes">
+      Typically scripted in some manner (DSL, XML) with state management. There
+      are fewer of these because there's a lot more to them, and it's trickier
+      to get your abstractions right. I've written three of these a long, long
+      time ago (internal).
+    </aside>
+  </section>
+
+  <section>
+    <h2>Type: Predictable workflow</h2>
+    <p>Every action may change but in ways you can know before running the test</p>
+    <p class="fragment fade-in">Examples: shopping checkout, student writing</p>
+    <p class="fragment fade-in">More straightforward</p>
     <aside class="notes">
       And then there are a lot of applications that are more workflow-y but not
       as dynamic. The tool you use depends on how much state you need to carry
@@ -151,8 +265,10 @@
   </section>
 
   <section>
-    <h2>Session-based simulation</h2>
-    <p>Fun image here</p>
+    <h2>Predictable workflow ~~ Scripted session simulation</h2>
+    <p>
+      <img src="lib/images/rail_sequence.jpg" alt="Wakeboarder rides rail" />
+    </p>
     <aside class="notes">
       This middle ground forces you to generate sessions, or steps of actions,
       but the smarts to do this is typically far simpler than the runtime
@@ -161,10 +277,51 @@
   </section>
 
   <section>
-    <h3>Photos</h3>
+    <h2>Preditable workflow tools</h2>
+    <p>Both and neither...?</p>
+    <p class="fragment fade-in">
+      Random access tools support sessions poorly, if at all.
+    </p>
+    <p class="fragment fade-in">
+      Varied workflow tools can be complicated to use and brittle, <br />
+      possibly overkill for your app.
+    </p>
+    <aside class="notes">
+      <p>Random access (stress test) tools treat every URL as separate from
+      every other, and many just take a set of URLs an pound them randomly.
+      They also generally do not support per-request headers (Vegeta
+      excepted, see
+      <a href="https://github.com/tsenart/vegeta/pull/97">PR 97</a> and
+      <a href="https://github.com/tsenart/vegeta/pull/98">98</a>).
+      They're also focused on generating data for the entire activity vs
+      per session -- maybe your goal is to have a max time of activity per
+      session as opposed to a max time per individual transaction?</p>
 
+      <p>Much discussed earlier; idea of overkill is tricky, because you can
+      always take some of the strategies we talk about here and generate a
+      'static' script instead of relying on smarts.</p>
+    </aside>
+  </section>
+
+  <section>
+    <h2>As it happens...</h2>
+    <p>Scratching an itch is a thing</p>
+    <p class="fragment fade-in">
+      <img src="lib/images/korra_showing_her_stuff.jpg" alt="Korra" />
+   </p>
+   <aside class="notes">
+
+   </aside>
+  </section>
+
+  <section>
+    <h3>Image attribution</h3>
     <ul>
-        <li><a href="some-website">Some photo title</a></li>
+      <li><a href="http://en.wikiquote.org/wiki/Fred_Brooks">Fred Brooks</a></li>
+      <li><a href="http://frasier-and-niles.deviantart.com/art/Homer-Simpson-06-Simpsons-196269904">Homer Simpson pointing</a></li>
+      <li><a href="http://www.chiro.org/LINKS/ABSTRACTS/Stress_Test.shtml">Stress test (dolphin and cow)</a></li>
+      <li><a href="http://blueballfixed.ytmnd.com/">Blue Ball Machine</a></li>
+      <li><a href="http://www.wakeskating.com/showarticle.php?id=18">Wakeboard rail sequence</a></li>
     </ul>
   </section>
 

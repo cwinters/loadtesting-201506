@@ -38,10 +38,10 @@
 
 			#current-slide {
 				position: absolute;
-				width: 65%;
-				height: 100%;
+				width: 35%;
+				height: 40%;
 				top: 0;
-				left: 0;
+				right: 0;
 				padding-right: 0;
 			}
 
@@ -58,10 +58,19 @@
 				top: 40%;
 				right: 0;
 				width: 35%;
-				height: 60%;
+				height: 20%;
 				overflow: auto;
 
 				font-size: 18px;
+			}
+
+			#notes {
+				position: absolute;
+				width: 62%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				padding-right: 0;
 			}
 
 				.speaker-controls-time.hidden,
@@ -151,9 +160,11 @@
 	</head>
 
 	<body>
-
+		<div id="notes" class="speaker-controls-notes hidden">
+			<h4 class="label">Notes</h4>
+			<div class="value"></div>
+		</div>
 		<div id="current-slide"></div>
-		<div id="upcoming-slide"><span class="label">UPCOMING:</span></div>
 		<div id="speaker-controls">
 			<div class="speaker-controls-time">
 				<h4 class="label">Time <span class="reset-button">Click to Reset</span></h4>
@@ -165,12 +176,8 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-
-			<div class="speaker-controls-notes hidden">
-				<h4 class="label">Notes</h4>
-				<div class="value"></div>
-			</div>
 		</div>
+		<div id="upcoming-slide"><span class="label">UPCOMING:</span></div>
 
 		<script src="../../plugin/markdown/marked.js"></script>
 		<script>
