@@ -344,6 +344,14 @@
   </section>
 
   <section>
+    <h2>Do a lot with a little</h2>
+    <p>
+      ...conjecture: embed in your components the ability to generate load for
+      themselves, based on their knowledge of the world
+    </p>
+  </section>
+
+  <section>
     <p>
       <img src="lib/images/cat_jumps_at_scary_toast.gif" alt="Pop!" />
       <br />
@@ -351,6 +359,37 @@
     </p>
     <aside class="notes">Hydration is important!</aside>
   </section>
+
+  
+  <pre>
+    * introduce our app
+      * student logs in and views home page of assignments
+      * student chooses assignment which loads previous drafts and scores
+      * student writes essay incrementally, autosaving the essay
+        every eight seconds
+      * student submits essay (twice) for scoring and views scores
+    * Goal - tool (or tools) that:
+      * allows us to simulate lots of users hitting our site,
+      * tells us where API bottlenecks are in our application, so that we can
+      * investigate bottlenecks in detail using profiling or other tools
+    * how to generate load using sessions
+      * how do you identify users? (auth token? cookie?)
+      * pick a single "type" of user and plot out how they use the system
+          * how do they start, how do they progress
+          * include ranges of pause times
+      * sample session for student (pseudocode)
+      * sample session for student (korra commands)
+    * running
+    * look at numbers
+    * look at newrelic
+    * what could be better?
+      * distributed clients
+      * reporting + visualization
+    * behavior follows motivation, or vice versa
+      * start doing this as part of your process and you'll get better at it
+      * you'll find interesting things to check and learn more about your application
+      * you'll probably also figure out some sort of profiling
+</pre>
 
   <section>
     <h3>Image attribution</h3>
@@ -363,7 +402,9 @@
       <li><a href="http://www.chiro.org/LINKS/ABSTRACTS/Stress_Test.shtml">Stress test (dolphin and cow)</a></li>
       <li><a href="http://blueballfixed.ytmnd.com/">Blue Ball Machine</a></li>
       <li><a href="http://www.wakeskating.com/showarticle.php?id=18">Wakeboard rail sequence</a></li>
+      <li><a href="http://www.nick.com/legend-of-korra/">"Korra The Legend of Korra" by "The Legend of Korra" and all characters are owned by Nickelodeon Studios. - From Nickelodeon Studios.</a></li>
       <li><a href="http://en.wikipedia.org/wiki/File:Korra_(Season_4)_appearance.jpg#/media/File:Korra_(Season_4)_appearance.jpg">"Korra (Season 4) appearance" by Source (WP:NFCC#4). Licensed under Fair use via Wikipedia</a></li>
+      <li><a href="http://en.wikipedia.org/wiki/File:Korra_The_Legend_of_Korra.jpg#/media/File:Korra_The_Legend_of_Korra.jpg">Korra shows her stuff; At Wikipedia via Nickelodeon</a></li>
     </ul>
   </section>
 
