@@ -43,10 +43,11 @@
   <section>
     <h1>Load Testing: Finding a workable balance</h1>
     <p>
-      Chris Winters (@cwinters) - Turnitin / Lightside Labs
+      Chris Winters (<a href="http://twitter.com/cwinters">@cwinters</a>) - Turnitin / Lightside Labs
     </p>
     <p align="center">
       <img src="lib/images/turnitin.png" alt="Turnitin logo" width="106" height="35"/>
+      &nbsp;
       <img src="lib/images/lightside.png" alt="Lightside logo" width="121" height="35" />
     </p>
     <p>
@@ -60,15 +61,21 @@
       Is it?
     </p>
     <aside class="notes">
-      Load testing has this aura of black magic around it. I think that
-      makes it difficult for normal humans like you and me to approach. I'm no
-      expert, and I get things wrong all the time, and I have so much to learn.
-      But that doesn't mean we can't talk about what we know!
+      <p>Load testing has this aura of black magic around it. I think that
+      makes it difficult for normal humans like you and me to approach, much
+      less for us to integrate into our everyday practices.</p>
+
+      <p>I'm no expert, and I get things wrong all the time, and I have so much
+      to learn.  But that doesn't mean we can't talk about what we know!</p>
     </aside>
   </section>
 
   <section>
     <h2>A story</h2>
+    <p>
+      <img src="lib/images/tell_me_a_mitzi.jpg" alt="Tell me a Mitzi" />
+    </p>
+
     <aside class="notes">
       <p>You have a great idea for a social recipes app. Like all good startups
       you start with functionality -- you release it to friends and family, and
@@ -125,7 +132,7 @@
   <section>
     <h2>Goal: Learn enough to get by</h2>
     <p>
-      Run through some types and expectation,
+      Run through some types and expectations,
       <br />
       strengths of different tools,
       <br />
@@ -149,6 +156,15 @@
       Standard disclaimer. Also, note that I'll be talking about tools that
       exercise your application via HTTP rather than automating a browser.:
     </aside>
+  </section>
+
+  <section>
+    <p>
+      <img src="lib/images/buffy-three-frame-closeup-glare.gif" alt="Look!" />
+      <br />
+      <img src="lib/images/bunny_falling_over_at_desk.gif" alt="Awww...." />
+    </p>
+    <aside class="notes">Take a drink of water</aside>
   </section>
 
   <section>
@@ -208,16 +224,22 @@
 
     <p>Every action may change based on the results of previous actions</p>
 
-    <p class="fragment fade-in">Examples: insurance application, adaptive math</p>
+    <p class="fragment fade-in">Examples: hospital admission, adaptive math</p>
 
     <p class="fragment fade-in">Difficult but fun; potentially brittle</p>
 
     <aside class="notes">
-      Next-level load testing, required if you have a stateful application that where
+      <p>Next-level load testing, required if you have a stateful application that where
       each result depends on earlier actions. You also work with users as users
-      vs dealing with a random bag of URLs. Tests can be brittle because the
-      representation of the logic to move through the workflow is almost
-      certainly separate from the business logic.
+      vs dealing with a random bag of URLs.</p>
+
+      <p>Explain modern hospital admission form and the presence of rules engines
+      that generate different screens based on the combinations of factors;
+      similar for adaptive math.</p>
+
+      <p>Tests can be brittle because the representation of the logic to move
+      through the workflow is almost certainly separate from the business
+      logic.</p>
     </aside>
   </section>
 
@@ -227,10 +249,13 @@
       <img src="lib/images/crazy_complicated_process.gif" alt="Crazy complicated process" />
     </p>
     <aside class="notes">
-      These can be straightforward, but they can also be an Effort Pit. Simulating
-      users can be difficult -- give example of AccuNurse, difficulties of state
-      management that you keep in your head with little effort. To be useful
-      you have to know your users pretty well.
+      <p>It's possible for these to be straightforward, but they can also be an
+      Effort Pit. Simulating users can be difficult -- you may have to code
+      state management that end users find trivial ("if the patient has been in
+      residence longer than a week with a foo infection then the dietary
+      protocol must change to low-sodium...")</p>
+
+      <p>To be useful you have to know your users pretty well.</p>
     </aside>
   </section>
 
@@ -244,10 +269,11 @@
       <li>Multi-mechanize</li>
     </ul>
     <aside class="notes">
-      Typically scripted in some manner (DSL, XML) with state management. There
+      <p>Typically scripted in some manner (DSL, XML) with state management. There
       are fewer of these because there's a lot more to them, and it's trickier
-      to get your abstractions right. I've written three of these a long, long
-      time ago (internal).
+      to get your abstractions right.</p>
+
+      <p>I've written three of these a long, long time ago (internal).</p>
     </aside>
   </section>
 
@@ -277,7 +303,7 @@
   </section>
 
   <section>
-    <h2>Preditable workflow tools</h2>
+    <h2>Predictable workflow tools</h2>
     <p>Both and neither...?</p>
     <p class="fragment fade-in">
       Random access tools support sessions poorly, if at all.
@@ -307,21 +333,37 @@
     <h2>As it happens...</h2>
     <p>Scratching an itch is a thing</p>
     <p class="fragment fade-in">
-      <img src="lib/images/korra_showing_her_stuff.jpg" alt="Korra" />
-   </p>
-   <aside class="notes">
+      <img src="lib/images/korra_season_4.jpg" height="600" width="429" alt="Korra" />
+    </p>
+    <aside class="notes">
+     Korra is a fork of Vegeta, building on its concurrency model but adding
+     the idea of scripted sessions. These include the standard commands from
+     Vegeta along with the ability to pause the session between actions and
+     poll a URL until you get a desired response.
+    </aside>
+  </section>
 
-   </aside>
+  <section>
+    <p>
+      <img src="lib/images/cat_jumps_at_scary_toast.gif" alt="Pop!" />
+      <br />
+      <img src="lib/images/cat_busted_taking_stuff_out_of_drawer.gif" alt="Busted!" />
+    </p>
+    <aside class="notes">Hydration is important!</aside>
   </section>
 
   <section>
     <h3>Image attribution</h3>
     <ul>
+      <li><a href="https://mutteringretreat.wordpress.com/2014/03/18/tell-me-a-mitzi-by-lore-segal-illustrated-by-harriet-pincus/">Tell me a Mitzi</a>
+        from <a href="http://www.amazon.com/Tell-Me-Mitzi-Lore-Segal/dp/0590338013/">the book</a>
+        illustrated by Harriet Pincus and written by Lore Segal</li>
       <li><a href="http://en.wikiquote.org/wiki/Fred_Brooks">Fred Brooks</a></li>
       <li><a href="http://frasier-and-niles.deviantart.com/art/Homer-Simpson-06-Simpsons-196269904">Homer Simpson pointing</a></li>
       <li><a href="http://www.chiro.org/LINKS/ABSTRACTS/Stress_Test.shtml">Stress test (dolphin and cow)</a></li>
       <li><a href="http://blueballfixed.ytmnd.com/">Blue Ball Machine</a></li>
       <li><a href="http://www.wakeskating.com/showarticle.php?id=18">Wakeboard rail sequence</a></li>
+      <li><a href="http://en.wikipedia.org/wiki/File:Korra_(Season_4)_appearance.jpg#/media/File:Korra_(Season_4)_appearance.jpg">"Korra (Season 4) appearance" by Source (WP:NFCC#4). Licensed under Fair use via Wikipedia</a></li>
     </ul>
   </section>
 
