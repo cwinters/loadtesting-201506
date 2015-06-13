@@ -22,8 +22,7 @@ What is a good example that's not hello world but also not too difficult?
 - Maybe just RA stuff? It's pretty straightforward, and there's nothing
   proprietary going on. Even if we show the app!
 - Compare/contrast with something like modcloth (WHAT WAS THE NAME OF THE
-  RIPOFF SITE?)
-
+  RIPOFF SITE? RioRea)
 
 ## Outsourcing/tools
 
