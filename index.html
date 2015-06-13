@@ -29,6 +29,15 @@
 	document.getElementsByTagName( 'head' )[0].appendChild( link );
 </script>
 
+<style type="text/css">
+  html.img-left div.slide-background.present {
+    background-position: left bottom;
+  }
+  .lightly {
+    color: #cccccc;
+  }
+</style>
+
 <!--[if lt IE 9]>
 <script src="lib/js/html5shiv.js"></script>
 <![endif]-->
@@ -113,7 +122,7 @@
     <aside class="notes">
       <p>My wife gets so tired of me saying this. But it's even more obvious in
       software development than other areas of life. It's been clear for years
-      that there is No Silver Bullet. And it's easy to say tut-tut at stories
+      that there is No Silver Bullet. And it's easy to tut-tut at stories
       like this and say it's obvious they should have done capacity planning,
       and load testing.</p>
 
@@ -132,11 +141,15 @@
   <section>
     <h2>Goal: Learn enough to get by</h2>
     <p>
-      Run through some types and expectations,
-      <br />
-      strengths of different tools,
-      <br />
-      and talk about generating and testing load.
+      Run through some types and expectations
+    </p>
+
+    <p>
+      Talk about generating and testing load
+    </p>
+
+    <p>
+      Sprinkled with side-effects.
     </p>
     <aside class="notes">
       So what does that mean for today? We'll learn enough to get by. I'll
@@ -171,9 +184,10 @@
 
   <section>
     <p>
-      <img src="lib/images/buffy-three-frame-closeup-glare.gif" alt="Look!" />
-      <br />
       <img src="lib/images/bunny_falling_over_at_desk.gif" alt="Awww...." />
+    </p>
+    <p>
+      <img src="lib/images/buffy-three-frame-closeup-glare.gif" alt="Look!" />
     </p>
     <aside class="notes">Take a drink of water!</aside>
   </section>
@@ -183,13 +197,13 @@
 
     <p>Every action is separate from every other action</p>
 
-    <p class="fragment fade-in">Examples: catalog, search, blog</p>
+    <p class="fragment">Examples: catalog, search, blog</p>
 
-    <p class="fragment fade-in">This is great! (if you can get it)</p>
+    <p class="fragment">This is great! (if you can get it)</p>
     <aside class="notes">
       <p>Probably most popular type, and the one that most people
       have experience with.</p>
-      <p>It's certainly possible to build stateless services supporting these
+      <p>It's certainly possible to build stateful services supporting these
       examples, but it's not an intrinsic part of the domain.</p>
       <p>Stateless services are popular for a reason.</p>
     </aside>
@@ -241,14 +255,14 @@
 
     <p>Every action may change based on the results of previous actions</p>
 
-    <p class="fragment fade-in">Examples: hospital admission, adaptive math</p>
+    <p class="fragment">Examples: hospital admission, adaptive math</p>
 
-    <p class="fragment fade-in">Difficult but fun; potentially brittle</p>
+    <p class="fragment">Difficult but fun; potentially brittle</p>
 
     <aside class="notes">
       <p>Next-level load testing, required if you have a stateful application where
-      each result depends on earlier actions. You also work with users as users
-      vs dealing with a random bag of URLs.</p>
+      each result depends on earlier actions. You also work with users as <b>users</b>
+      vs treating their activity as a random bag of URLs.</p>
 
       <p>Explain modern hospital admission form and the presence of rules engines
       that generate different screens based on the combinations of factors;
@@ -306,8 +320,8 @@
   <section>
     <h2>Type: Predictable workflow</h2>
     <p>Every action may change but in ways knowable before running the test</p>
-    <p class="fragment fade-in">Examples: shopping checkout, student writing</p>
-    <p class="fragment fade-in">More straightforward</p>
+    <p class="fragment">Examples: shopping checkout, student writing</p>
+    <p class="fragment">More straightforward</p>
     <aside class="notes">
       And then there are a lot of applications that are more workflow-y but not
       as dynamic. The tool you use depends on how much state you need to carry
@@ -331,15 +345,15 @@
   <section>
     <h2>Predictable workflow tools</h2>
     <p>Both and neither...?</p>
-    <p class="fragment fade-in">
+    <p class="fragment">
       Random access tools support sessions poorly, if at all.
     </p>
-    <p class="fragment fade-in">
+    <p class="fragment">
       Varied workflow tools can be complicated to use and brittle, <br />
       possibly overkill for your app.
     </p>
     <aside class="notes">
-      <p>Random access (stress test) tools treat every URL as separate from
+      <p>"support sessions poorly" - Random access (stress test) tools treat every URL as separate from
       every other, and many just take a set of URLs an pound them randomly.
       They also generally do not support per-request headers (Vegeta
       excepted, see
@@ -349,7 +363,7 @@
       per session -- maybe your goal is to have a max time of activity per
       session as opposed to a max time per individual transaction?</p>
 
-      <p>Much discussed earlier; idea of overkill is tricky, because you can
+      <p>"brittle" - Much discussed earlier; idea of overkill is tricky, because you can
       always take some of the strategies we talk about here and generate a
       'static' script instead of relying on smarts.</p>
     </aside>
@@ -358,7 +372,7 @@
   <section>
     <h2>As it happens...</h2>
     <p>Scratching an itch is a thing</p>
-    <p class="fragment fade-in">
+    <p class="fragment">
       <img src="lib/images/korra_season_4.jpg" height="600" width="429" alt="Korra" />
     </p>
     <aside class="notes">
@@ -369,17 +383,6 @@
     </aside>
   </section>
 
-<!-- meh
-  <section>
-    <h2>Do a lot with a little</h2>
-    <p>
-      With a few simple directives and some fairly straightforward work you can accomplish quite a bit
-      ...conjecture: embed in your components the ability to generate load for
-      themselves, based on their knowledge of the world
-    </p>
-  </section>
--->
-
   <section>
     <p>
       <img src="lib/images/cat_jumps_at_scary_toast.gif" alt="Pop!" />
@@ -389,6 +392,7 @@
     <aside class="notes">Hydration is important!</aside>
   </section>
 
+  <!-- TODO: keep this? We don't really touch of API bottlenecks, or profiling... -->
   <section>
     <h2>Our goals</h2>
     <p>Tool/s that:</p>
@@ -401,9 +405,9 @@
 
   <section>
     <h2>Our sample app: student writing</h2>
-    <p>This may sounds familiar...</p>
-    <p>...it's actually a good example!</p>
-    <p class="fragment fade-in">Plus, I'm lazy</p>
+    <p>This may sound familiar...</p>
+    <p class="fragment">...it's actually a good example!</p>
+    <p class="fragment">Plus, I'm lazy</p>
     <aside class="notes">
       <p>Our app is an Angular application, the backend just serves API
         requests and has almost nothing to do with the front end</p>
@@ -413,9 +417,9 @@
   <section>
     <h2>Who are the main users?</h2>
     <p>Our case is pretty easy - students</p>
-    <p class="fragment fade-in">Yours might not be -- maybe time for user research?
+    <p class="fragment">Yours might not be -- maybe time for user research?
       Did you see Stephanie's talk?</p>
-    <p class="fragment fade-in">Start somewhere! Simple means it's ok to toss</p>
+    <p class="fragment">Start somewhere! Simple means it's ok to toss</p>
     <aside class="notes">
       <p>"ok to toss" - similar to code retreat; it's a valuable lesson -- Eric Evans 
         <a href="http://www.se-radio.net/2015/05/se-radio-episode-226-eric-evans-on-domain-driven-design-at-10-years/">talks</a>
@@ -461,8 +465,8 @@
     <aside class="notes">
       <p>Most people know about these, but it's worth bringing up as a tracing
         tool so you can tie user actions in the front end to the API calls they
-        trigger along with the order. Be sure to keep the window open to
-        capture any periodic polls!</p>
+        trigger along with the order.</p>
+      <p>Be sure to keep the window open to capture any periodic polls!</p>
     </aside>
   </section>
 
@@ -474,10 +478,11 @@
       <li>==&gt; Our login process could be a bottleneck AND WE WOULDN'T KNOW</li>
     </ul>
     <aside class="notes">
-      <p>Our script generation process can either use an existing token or create a new one</p>
-      <p>...of course, we can always test the login process separately, just
-        with a very short script that distributes logins over a period of
-        time</p>
+      <p>Our script generation process can either use an existing token or
+        create a new one</p>
+      <p>...of course, we can always test the login
+        process separately, just with a very short script that distributes
+        logins over a period of time</p>
       <p>Why not just login as part of this? Korra can't remember state from
         one request to another; it's a design constraint -- at least for now.</p>
     </aside>
@@ -505,9 +510,13 @@
 <pre>
 GET /pages/students/assignments
 <b>Authorization: Token {{student_token}}</b>
+
 GET /api/classes/enrolled
 Authorization: Token {{student_token}}
 </pre>
+    <aside class="notes">
+      <p>1..n headers can be passed with every request</p>
+    </aside>
   </section>
 
   <section>
@@ -524,6 +533,7 @@ PAUSE {{random (<b>0..120</b>) * 1000}}
 
 GET /pages/students/assignments
 Authorization: Token {{student_token}}
+
 GET  /api/classes/enrolled
 Authorization: Token {{student_token}}
 </pre>
@@ -534,19 +544,29 @@ Authorization: Token {{student_token}}
   </section>
 
   <section>
+    <p>
+      <img src="lib/images/wookie-dance.gif" alt="Dance!" />
+      <br />
+      <img src="lib/images/West-Side-Story-snapping-fingers.gif" alt="Snap!" />
+    </p>
+  </section>
+
+  <section>
     <h2>Simulating, step two</h2>
     <p>2. <b>student chooses assignment</b> which loads previous drafts and scores</p>
-    <p>This choice is embedded in an ID in the next URLs</p>
+    <ul>
+      <li>Embedded as <code>{{assignment_id}}</code> in URLs</li>
+    </ul>
   </section>
 
   <section>
     <h2>Simulating, step two</h2>
     <p>2. student chooses assignment which <b>loads previous drafts and scores</b></p>
 <pre>
-...
-GET /api/assignments/{assignment_id}/share?token={assignment_token}
+GET /api/assignments/{{assignment_id}}/share?token={{assignment_token}}
 Authorization: Token {{student_token}}
-GET /pages/students/assignment_answers/{assignment_id}
+
+GET /pages/students/assignment_answers/{{assignment_id}}
 Authorization: Token {{student_token}}
 </pre>
   </section>
@@ -572,23 +592,27 @@ Authorization: Token {{student_token}}
     <h2>Presenting results, tips</h2>
     <ul>
       <li>Always record the "before" for comparison</li>
-      <li>Record it in the tool, ensure in ballpark of NewRelic (etc)</li>
-      <li>Both "before" and "after" should be a representative sample, not
+      <li class="fragment">Record it in the tool, ensure in ballpark of NewRelic (etc)</li>
+      <li class="fragment">Both "before" and "after" should be a representative sample, not
         worst/best</li>
-      <li>Some people think graphically, some with tables</li>
-      <li>Boil down into user experience where possible</li>
+      <li class="fragment">Some people think graphically, some with tables</li>
+      <li class="fragment">Boil down into user experience where possible</li>
       <!-- TODO: spreadsheet from https://docs.google.com/a/iparadigms.com/spreadsheets/d/1BY9ZG2JhSVPOTYya9-BbSBT1UhH0DGq_CKjgKJTdVgE/edit?usp=sharing ?? -->
     </ul>
+    <aside class="notes">
+      <p>
+    </aside>
   </section>
 
-  <section>
+  <section data-background="lib/images/ella_writing.jpg"
+    data-background-size="500px" data-state="img-left">
     <h2>Simulating, step three</h2>
     <p>3. <b>Student writes incrementally over a session</b></p>
     <ul>
-      <li>We autosave ...<b>if</b> anything has changed</li>
+      <li>We autosave every eight secs...<b>if</b> anything has changed</li>
       <li>Humans do not write at a uniform speed, it's bursty</li>
     </ul>
-    <img src="lib/images/ella_writing.jpg" alt="kid writing" />
+    <!--<img src="lib/images/ella_writing.jpg" alt="kid writing" />-->
   </section>
 
   <section>
@@ -601,9 +625,10 @@ Authorization: Token {{student_token}}
 
   <section>
     <h2>Simulating, step three</h2>
-    <p>For every sentence or two, we'll generate:</p>
+    <p>For every handful of words, we'll generate:</p>
 <pre>
-PAUSE {{random (0..120) * 1000}}
+PAUSE {{random (0..45) * 1000}}
+
 POST /api/assignments/{{assignment_id}}/autosave
 Authorization: Token {{student_token}}
 Content-Type: application/json
@@ -627,6 +652,14 @@ Content-Type: application/json
   </section>
 
   <section>
+    <p>
+      <img src="lib/images/supercut_eyeglance_sideways.gif" alt="I see you!" />
+      <br />
+      <img src="lib/images/sewing_kitten.gif" alt="sew sew sew" />
+    </p>
+  </section>
+
+  <section>
     <h2>Simulating, step four</h2>
     <p>4. Student checks score twice during session, including once at end</p>
     <p>
@@ -638,15 +671,18 @@ Content-Type: application/json
   <section>
     <h2>Simulating, step four</h2>
 <pre>
+PAUSE {{random (0..120) * 1000}}
+
 POST /api/assignments/{{assignment_id}}/share
 Authorization: Token {{student_token}}
 Content-Type: application/json
 @posts/{{student_id}}/{{assignment_id}}_signal_check.json
+
 <b>POLL GET /pages/students/signal_check/latest
 [Wait=2000 Count=5 Status=200]</b>
 </pre>
     <aside class="notes">
-      <p>If you've built your app properly then you've got asynchronous calls.
+      <p>If you've built a 'modern' app then you've got asynchronous calls somewhere.
         And if you have those, you're probably polling. You're trying to simulate
         how users impact the site, so you have to poll too.</p>
       <p>Polling -- like infinite loops -- should have a stop condition. This has
@@ -656,22 +692,83 @@ Content-Type: application/json
   </section>
 
   <section>
-    <h2>What does it mean?</h2>
+    <h2>All together now (1/2)</h2>
+<pre>
+PAUSE {{random (0..120) * 1000}}
+
+GET /pages/students/assignments
+Authorization: Token {{student_token}}
+
+GET /api/classes/enrolled
+Authorization: Token {{student_token}}
+
+GET /api/assignments/{assignment_id}/share?token={assignment_token}
+Authorization: Token {{student_token}}
+
+GET /pages/students/assignment_answers/{assignment_id}
+Authorization: Token {{student_token}}
+</pre>
+  </section>
+
+  <section>
+    <h2>All together now (2/2)</h2>
+<pre>
+for each handful of words in sample_essay:
+  PAUSE {{random (0..45) * 1000}}
+
+  POST /api/assignments/{{assignment_id}}/autosave
+  Authorization: Token {{student_token}}
+  Content-Type: application/json
+  @posts/{{student_id}}/{{assignment_id}}_{{count}}.json
+
+for signal_check in ['midway', 'end']:
+  PAUSE {{random (0..120) * 1000}}
+  POST /api/assignments/{{assignment_id}}/share
+  Authorization: Token {{student_token}}
+  Content-Type: application/json
+  @posts/{{student_id}}/{{assignment_id}}_signal_check.json
+
+  POLL GET /pages/students/signal_check/latest
+  [Wait=2000 Count=5 Status=200]
+</pre>
+  </section>
+
+  <section>
+    <h2>Gotchas</h2>
+    <p>
+      Careful about running everything from a single node
+    </p>
+  </section>
+
+  <section>
+    <h2>So you've run some tests...</h2>
     <ul>
       <li>Results often communicated as average.</li>
-      <li class="fragment fade-in">Average is a lie!</li>
-      <!-- TODO: demonstrate how average is a lie -->
+      <li class="fragment">Average is a lie!</li>
+      <li class="fragment">18 @ 100ms, 2 @ 2000ms = 5800ms / 20 = 290ms avg</li>
+      <li class="fragment">...but 10% of your transactions were ~7x the average!</li>
     </ul>
   </section>
 
   <section>
     <h2>If not average...</h2>
     <ul>
-      <li>Instead use percentiles: 50, 75, 95, 99 are common</li>
-      <li class="fragment fade-in">Distribution of experience, though sometimes you focus</li>
-      <li class="fragment fade-in">...plus the 95% is a leader to other problems</li>
+      <li>Instead use percentiles: 75, 95, 99 are common</li>
+      <li class="fragment">Be able to explain percentiles to normal people</li>
+      <li class="fragment">Distribution of experience, though sometimes you focus</li>
+      <li class="fragment">...plus the 95% is a leader to other problems</li>
     </ul>
     <aside class="notes">
+      <p>"be able to explain" - for: 75% at 60ms, 95% at 200ms, and 99% at
+        3200ms you can say that 75/100 people got a response in 60 ms or less,
+        95/100 got a response in 200ms or less, and only 1 or 2 got a response
+        in 3.2 seconds.</p>
+      <p>"distribution of experience" - you might be very happy with 9/10 of
+        your users getting a good experience; you might be happy with 75/100,
+        or 95/100; it's really about your tolerance for risk and how much users
+        are exposed to this. Maybe it's only during a 10 minute period of each
+        weekday when classes across the country are finishing classes before
+        lunch. It's annoying, but so are a lot of other things</p>
       <p>"leader to other problems" - 95% may be an indicator not only that
         your service is constrained, but something your service calls is
         constrained (database, search index)</p>
@@ -696,43 +793,53 @@ Content-Type: application/json
     </aside>
   </section>
 
-<!--
-<pre>
-  * introduce our app
-    * student logs in and views home page of assignments
-      * student chooses assignment which loads previous drafts and scores
-      * student writes essay incrementally, autosaving the essay
-        every eight seconds
-      * student submits essay (twice) for scoring and views scores
-    * Goal - tool (or tools) that:
-    * how to generate load using sessions
-      * how do you identify users? (auth token? cookie?)
-      * pick a single "type" of user and plot out how they use the system
-          * how do they start, how do they progress
-          * include ranges of pause times
-      * sample session for student (pseudocode)
-      * sample session for student (korra commands)
-    * running
-    * look at numbers
-    * look at newrelic
-      * outsourcing is a thing that makes you go faster; figure out what's core to
-        your business and do that, outsource everything else
-      * do we want to recreate/reconfigure graphs etc?
-      * tools that do 80% of what you want with little work are better than tools
-        that do 100% of what you want with work
-    * look at newrelic
-    * what could be better?
-      * distributed clients
-      * reporting + visualization
-    * behavior follows motivation, or vice versa
-      * start doing this as part of your process and you'll get better at it
-      * you'll find interesting things to check and learn more about your application
-      * you'll probably also figure out some sort of profiling
-</pre>
--->
+  <section>
+    <h2>Results</h2>
+    <ul>
+      <li>Results from tools can be rudimentary</li>
+      <li>...though they do include network latency</li>
+      <li class="fragment" data-fragment-index="1">Server-based tools can also be great - NewRelic</li>
+      <li class="fragment" data-fragment-index="1">Not perfect, but tools doing 80% with little work better than doing
+        100% with lots of work</li>
+      <li class="fragment">They have thought way more about this than you have</li>
+      <li class="fragment">Outsourcing tools scales your team and focuses your effort</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Behavior and motivation stuff</h2>
+    <ul>
+      <li>Load testing is a virus (like many good practices)</li>
+      <li class="fragment">Do it all the time, you'll get better</li>
+      <li class="fragment">Learn more about how your app works</li>
+      <li class="fragment">Get a better feel for what's costly</li>
+      <li class="fragment">Probably also learn more about profiling</li>
+    </ul>
+    <aside class="notes">
+      <p>"virus" - the behavior of load testing leads to other behaviors, which
+        change your views on performance</p>
+      <p>"do it all the time" - or as
+        <a href="http://martinfowler.com/bliki/FrequencyReducesDifficulty.html">Martin Fowler puts it</a>:
+        "If it hurts, do it more often"</p>
+      <p>"better feel" - aka, intuition</p>
+    </aside>
+  </section>
+
+  <section data-background="lib/images/korra_looks_over_republic_city.png">
+    <h1 style="color: #000000; font-weight: bold">So much to do!</h1>
+    <aside class="notes">
+      <p>distributed clients and coordination</p>
+      <p>web interface for running</p>
+      <p>API for running (agent model)</p>
+      <p>reporting and visualization</p>
+    </aside>
+
+  </section>
 
   <section>
     <h2>Thank you!</h2>
+
+    <p><img src="lib/images/whiskeytime.gif" alt="that's it!" /></p>
 
     <p>
       Chris Winters (<a href="http://twitter.com/cwinters">@cwinters</a>)
@@ -783,7 +890,7 @@ Content-Type: application/json
     controls: true,
     progress: true,
     history: true,
-    center: true,
+    center: false,
 
     theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
     transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
