@@ -69,7 +69,7 @@
     </p>
     <aside class="notes">
       <p>Load testing has this aura of black magic around it. I think that
-      makes it difficult for normal humans like you and me to approach, much
+      makes it difficult for normal humans (like me) to approach, much
       less for us to integrate into our everyday practices.</p>
 
       <p>I'm no expert, and I get things wrong all the time, and I have so much
@@ -108,7 +108,7 @@
       They still dig you, but you feel like they'll move on given much more
       trouble.</p>
 
-      <p>... how does this end?</p>
+      <p>... are there good endings for this?</p>
     </aside>
   </section>
 
@@ -126,9 +126,11 @@
       and load testing.</p>
 
       <p>But there are trade-offs for doing that early, we usually call those
-      opportunity costs. Also, people who understand performance of many different parts of the system
-      are <b>really</b> hard to find. (Probably because most organizations don't
-      value them well, but that's another talk.)</p>
+        opportunity costs. (Not to mention features that are cut-off because they're
+        not initially performant.) Also, people who understand performance of
+        many different parts of the system are <b>really</b> hard to find.
+        (Probably because most organizations don't value them well, but that's
+        another talk.)</p>
 
       <p>I'm a classic fumbler with performance as well. So like most of us when
       there are problems I tinker and poke and experiment. And that all takes
@@ -192,6 +194,15 @@
       <img src="lib/images/buffy-three-frame-closeup-glare.gif" alt="Look!" />
     </p>
     <aside class="notes">Take a drink of water!</aside>
+  </section>
+
+  <section>
+    <h2>Different types of load testing</h2>
+    <p>
+      <img src="lib/images/calvin_and_hobbes_19861126_load_limit_on_bridges.gif"
+           width="900" height="283"
+           alt="Calvin and Hobbes knows all" />
+    </p>
   </section>
 
   <section>
@@ -753,6 +764,17 @@ for each signal_check in ['midway', 'end']:
   POLL GET /pages/students/signal_check/latest
   [Wait=2000 Count=5 Status=200]
 </pre>
+  </section>
+
+  <section>
+    <h2>What is success? Failure?</h2>
+
+    <ul>
+      <li>Before you do anything, define desired outcomes with your team</li>
+      <li class="fragment">What transaction times are you shooting for?</li>
+      <li class="fragment">...probably better, what times are you scared of?</li>
+      <li class="fragment">Be wary of load testing without these: effort pit!</li>
+    </ul>
   </section>
 
   <section>
